@@ -22,7 +22,7 @@ namespace ProductBackendAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        public IActionResult Get(Guid id)
+        public IActionResult Get(string id)
         {
             try
             {
@@ -45,7 +45,7 @@ namespace ProductBackendAPI.Controllers
         {
             try
             {
-                product.Id = Guid.NewGuid();
+                product.Id = Guid.NewGuid().ToString();
                 ProductData.Products.Add(product);
                 return CreatedAtAction(nameof(Get), new { id = product.Id }, product);
             }
@@ -81,7 +81,7 @@ namespace ProductBackendAPI.Controllers
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Delete(Guid id)
+        public IActionResult Delete(string id)
         {
             try
             {
