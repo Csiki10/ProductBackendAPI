@@ -1,12 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using Moq;
+using NUnit.Framework;
 using ProductBackendAPI.Controllers;
 using ProductBackendAPI.Models;
+using System.Collections.Generic;
 
 namespace ProductBackendAPI.Tests
 {
+    [TestFixture]
     public class ProductControllerTests
     {
-        [Fact]
+        [Test]
         public void Get_ReturnsListOfProducts()
         {
             // Arrange
@@ -17,10 +22,10 @@ namespace ProductBackendAPI.Tests
             var result = controller.Get();
 
             // Assert
-            Assert.IsType<List<Product>>(result);
+            Assert.That(result, Is.InstanceOf<List<Product>>());
         }
 
-        [Fact]
+        [Test]
         public void Get_ReturnsNotFoundForNonexistentId()
         {
             // Arrange
@@ -31,8 +36,7 @@ namespace ProductBackendAPI.Tests
             var result = controller.Get("nonexistentId");
 
             // Assert
-            Assert.IsType<NotFoundResult>(result);
+            Assert.That(result, Is.InstanceOf<NotFoundResult>());
         }
     }
 }
-
